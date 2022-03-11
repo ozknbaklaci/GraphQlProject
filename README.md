@@ -4,9 +4,9 @@ Application Package
 
 The following commands run to Package Manager Console
 
-Install-Package GraphQL.Server.Transports.AspNetCore.SystemTextJson
+1- Install-Package GraphQL.Server.Transports.AspNetCore.SystemTextJson
 
-Install-Package graphiql   => (GUI for editing and testing GraphQL queries and mutations)
+2- Install-Package graphiql   => (GUI for editing and testing GraphQL queries and mutations)
 
 => https://prnt.sc/pP3DjE1DTsun
 
@@ -21,3 +21,8 @@ AddProduct => https://prnt.sc/_Ojlj4cK2t99
 UpdateProduct => https://prnt.sc/sGyR-crFMrFj
 
 DeleteProduct => https://prnt.sc/KscEiRJLxTlV
+
+
+3- Install-Package Microsoft.EntityFrameworkCore
+
+4- Install-Package Microsoft.EntityFrameworkCore.SqlServer
