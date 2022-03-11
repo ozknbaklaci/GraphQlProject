@@ -14,12 +14,14 @@ using System.Threading.Tasks;
 using GraphiQl;
 using GraphQL.Server;
 using GraphQL.Types;
+using GraphQlProject.Data;
 using GraphQlProject.Interfaces;
 using GraphQlProject.Mutation;
 using GraphQlProject.Query;
 using GraphQlProject.Schema;
 using GraphQlProject.Services;
 using GraphQlProject.Type;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphQlProject
 {
@@ -42,6 +44,7 @@ namespace GraphQlProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQlProject", Version = "v1" });
             });
 
+            //services.AddTransient<IProductService, DummyProductService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<ProductType>();
             services.AddTransient<ProductQuery>();
@@ -52,10 +55,14 @@ namespace GraphQlProject
             {
                 options.EnableMetrics = false;
             }).AddSystemTextJson();
+
+            services.AddDbContext<GraphQlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("GraphQLConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GraphQlDbContext graphQlDbContext)
         {
             if (env.IsDevelopment())
             {
@@ -64,6 +71,7 @@ namespace GraphQlProject
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GraphQlProject v1"));
             }
 
+            graphQlDbContext.Database.EnsureCreated();
             app.UseGraphiQl("/graphql");
             app.UseGraphQL<ISchema>();
 
