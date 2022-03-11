@@ -11,8 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraphiQl;
+using GraphQL.Server;
+using GraphQL.Types;
 using GraphQlProject.Interfaces;
+using GraphQlProject.Query;
+using GraphQlProject.Schema;
 using GraphQlProject.Services;
+using GraphQlProject.Type;
 
 namespace GraphQlProject
 {
@@ -36,6 +42,14 @@ namespace GraphQlProject
             });
 
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<ProductType>();
+            services.AddTransient<ProductQuery>();
+            services.AddTransient<ISchema, ProductSchema>();
+
+            services.AddGraphQL(options =>
+            {
+                options.EnableMetrics = false;
+            }).AddSystemTextJson();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +61,9 @@ namespace GraphQlProject
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GraphQlProject v1"));
             }
+
+            app.UseGraphiQl("/graphql");
+            app.UseGraphQL<ISchema>();
 
             app.UseHttpsRedirection();
 
