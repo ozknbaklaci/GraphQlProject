@@ -7,7 +7,7 @@ namespace GraphQlProject.Services
 {
     public class ProductService : IProduct
     {
-        private static List<Product> _products = new()
+        private static readonly List<Product> Products = new()
         {
             new Product { Id = 0, Name = "Coffee", Price = 10 },
             new Product { Id = 1, Name = "Tea", Price = 15 },
@@ -15,29 +15,29 @@ namespace GraphQlProject.Services
 
         public List<Product> GetAllProducts()
         {
-            return _products;
+            return Products;
         }
 
         public Product AddProduct(Product product)
         {
-            _products.Add(product);
+            Products.Add(product);
             return product;
         }
 
         public Product UpdateProduct(int id, Product product)
         {
-            _products[id] = product;
+            Products[id] = product;
             return product;
         }
 
         public void DeleteProduct(int id)
         {
-            _products.RemoveAt(id);
+            Products.RemoveAt(id);
         }
 
         public Product GetProductById(int id)
         {
-            return _products.Find(p => p.Id == id);
+            return Products.Find(p => p.Id == id);
         }
     }
 }
