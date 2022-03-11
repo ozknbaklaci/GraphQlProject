@@ -3,7 +3,7 @@ using GraphQlProject.Models;
 
 namespace GraphQlProject.Interfaces
 {
-    public interface IProduct
+    public interface IProductService
     {
         List<Product> GetAllProducts();
         Product AddProduct(Product product);

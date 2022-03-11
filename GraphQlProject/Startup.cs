@@ -35,7 +35,7 @@ namespace GraphQlProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQlProject", Version = "v1" });
             });
 
-            services.AddTransient<IProduct, ProductService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

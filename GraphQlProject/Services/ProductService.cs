@@ -5,7 +5,7 @@ using GraphQlProject.Models;
 
 namespace GraphQlProject.Services
 {
-    public class ProductService : IProduct
+    public class ProductService : IProductService
     {
         private static readonly List<Product> Products = new()
         {

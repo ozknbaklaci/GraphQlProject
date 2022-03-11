@@ -11,9 +11,9 @@ namespace GraphQlProject.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProduct _productService;
+        private readonly IProductService _productService;
 
-        public ProductsController(IProduct productService)
+        public ProductsController(IProductService productService)
         {
             _productService = productService;
         }
