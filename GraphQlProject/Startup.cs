@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GraphQlProject.Interfaces;
+using GraphQlProject.Services;
 
 namespace GraphQlProject
 {
@@ -32,6 +34,8 @@ namespace GraphQlProject
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQlProject", Version = "v1" });
             });
+
+            services.AddTransient<IProduct, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
