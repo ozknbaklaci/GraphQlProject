@@ -8,5 +8,16 @@ Install-Package GraphQL.Server.Transports.AspNetCore.SystemTextJson
 
 Install-Package graphiql   => (GUI for editing and testing GraphQL queries and mutations)
 
+=> https://prnt.sc/pP3DjE1DTsun
 
-![image](https://user-images.githubusercontent.com/35361821/157866227-c07dc282-dd64-4ae4-aa9a-f9ba52927c4a.png)
+Examples => 
+
+GetAll => https://prnt.sc/oFS_lXgYNOd7
+
+GetById => https://prnt.sc/gANq1wm0jpLF
+
+AddProduct => https://prnt.sc/_Ojlj4cK2t99
+
+UpdateProduct => https://prnt.sc/sGyR-crFMrFj
+
+DeleteProduct => https://prnt.sc/KscEiRJLxTlV
