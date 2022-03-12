@@ -16,7 +16,6 @@
     <Folder Include="Mutation\CoffeeShop\" />
     <Folder Include="Query\CoffeeShop\" />
     <Folder Include="Schema\CoffeeShop\" />
-    <Folder Include="Type\CoffeeShop\" />
   </ItemGroup>
 
 </Project>
