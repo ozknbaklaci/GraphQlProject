@@ -15,11 +15,14 @@ using GraphiQl;
 using GraphQL.Server;
 using GraphQL.Types;
 using GraphQlProject.Data;
+using GraphQlProject.Data.CoffeeShop;
 using GraphQlProject.Interfaces;
+using GraphQlProject.Interfaces.CoffeeShop;
 using GraphQlProject.Mutation;
 using GraphQlProject.Query;
 using GraphQlProject.Schema;
 using GraphQlProject.Services;
+using GraphQlProject.Services.CoffeeShop;
 using GraphQlProject.Type;
 using Microsoft.EntityFrameworkCore;
 
@@ -37,12 +40,9 @@ namespace GraphQlProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GraphQlProject", Version = "v1" });
-            });
+
+            #region GraphQLExample
 
             //services.AddTransient<IProductService, DummyProductService>();
             services.AddTransient<IProductService, ProductService>();
@@ -51,27 +51,42 @@ namespace GraphQlProject
             services.AddTransient<ProductMutation>();
             services.AddTransient<ISchema, ProductSchema>();
 
+     
+
+            services.AddDbContext<GraphQlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("GraphQLConnectionString")));
+
+            #endregion
+
             services.AddGraphQL(options =>
             {
                 options.EnableMetrics = false;
             }).AddSystemTextJson();
 
-            services.AddDbContext<GraphQlDbContext>(options =>
+            #region CoffeeShopExample
+
+            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<ISubMenuService, SubMenuService>();
+            services.AddTransient<IReservationService, ReservationService>();
+
+            services.AddDbContext<CoffeeShopDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("GraphQLConnectionString")));
+                    Configuration.GetConnectionString("CoffeeShopConnectionString")));
+
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GraphQlDbContext graphQlDbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GraphQlDbContext graphQlDbContext, CoffeeShopDbContext coffeeShopDbContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GraphQlProject v1"));
             }
 
             graphQlDbContext.Database.EnsureCreated();
+            coffeeShopDbContext.Database.EnsureCreated();
             app.UseGraphiQl("/graphql");
             app.UseGraphQL<ISchema>();
 

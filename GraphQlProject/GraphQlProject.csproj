@@ -13,11 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\CoffeeShop\" />
     <Folder Include="Mutation\CoffeeShop\" />
     <Folder Include="Query\CoffeeShop\" />
     <Folder Include="Schema\CoffeeShop\" />
-    <Folder Include="Services\CoffeeShop\" />
     <Folder Include="Type\CoffeeShop\" />
   </ItemGroup>
 

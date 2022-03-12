@@ -3,9 +3,9 @@ using GraphQlProject.Models.CoffeeShop;
 
 namespace GraphQlProject.Interfaces.CoffeeShop
 {
-    public interface IReservation
+    public interface IMenuService
     {
-        List<Reservation> GeReservations();
-        Reservation AddReservation(Reservation reservation);
+        List<Menu> GetMenus();
+        Menu AddMenu(Menu menu);
     }
 }
