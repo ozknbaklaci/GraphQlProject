@@ -20,10 +20,13 @@ using GraphQlProject.Interfaces;
 using GraphQlProject.Interfaces.CoffeeShop;
 using GraphQlProject.Mutation;
 using GraphQlProject.Query;
+using GraphQlProject.Query.CoffeeShop;
 using GraphQlProject.Schema;
+using GraphQlProject.Schema.CoffeeShop;
 using GraphQlProject.Services;
 using GraphQlProject.Services.CoffeeShop;
 using GraphQlProject.Type;
+using GraphQlProject.Type.CoffeeShop;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQlProject
@@ -45,17 +48,17 @@ namespace GraphQlProject
             #region GraphQLExample
 
             //services.AddTransient<IProductService, DummyProductService>();
-            services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<ProductType>();
-            services.AddTransient<ProductQuery>();
-            services.AddTransient<ProductMutation>();
-            services.AddTransient<ISchema, ProductSchema>();
+            //services.AddTransient<IProductService, ProductService>();
+            //services.AddTransient<ProductType>();
+            //services.AddTransient<ProductQuery>();
+            //services.AddTransient<ProductMutation>();
+            //services.AddTransient<ISchema, ProductSchema>();
 
-     
 
-            services.AddDbContext<GraphQlDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("GraphQLConnectionString")));
+
+            //services.AddDbContext<GraphQlDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("GraphQLConnectionString")));
 
             #endregion
 
@@ -69,6 +72,14 @@ namespace GraphQlProject
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<ISubMenuService, SubMenuService>();
             services.AddTransient<IReservationService, ReservationService>();
+            services.AddTransient<MenuType>();
+            services.AddTransient<SubMenuType>();
+            services.AddTransient<ReservationType>();
+            services.AddTransient<MenuQuery>();
+            services.AddTransient<SubMenuQuery>();
+            services.AddTransient<ReservationQuery>();
+            services.AddTransient<RootQuery>();
+            services.AddTransient<ISchema, RootSchema>();
 
             services.AddDbContext<CoffeeShopDbContext>(options =>
                 options.UseSqlServer(
@@ -78,14 +89,14 @@ namespace GraphQlProject
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GraphQlDbContext graphQlDbContext, CoffeeShopDbContext coffeeShopDbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, /*GraphQlDbContext graphQlDbContext,*/ CoffeeShopDbContext coffeeShopDbContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            graphQlDbContext.Database.EnsureCreated();
+            //graphQlDbContext.Database.EnsureCreated();
             coffeeShopDbContext.Database.EnsureCreated();
             app.UseGraphiQl("/graphql");
             app.UseGraphQL<ISchema>();
