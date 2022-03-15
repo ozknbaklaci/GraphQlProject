@@ -19,6 +19,7 @@ using GraphQlProject.Data.CoffeeShop;
 using GraphQlProject.Interfaces;
 using GraphQlProject.Interfaces.CoffeeShop;
 using GraphQlProject.Mutation;
+using GraphQlProject.Mutation.CoffeeShop;
 using GraphQlProject.Query;
 using GraphQlProject.Query.CoffeeShop;
 using GraphQlProject.Schema;
@@ -27,6 +28,7 @@ using GraphQlProject.Services;
 using GraphQlProject.Services.CoffeeShop;
 using GraphQlProject.Type;
 using GraphQlProject.Type.CoffeeShop;
+using GraphQlProject.Type.CoffeeShop.InputTypes;
 using Microsoft.EntityFrameworkCore;
 
 namespace GraphQlProject
@@ -79,6 +81,13 @@ namespace GraphQlProject
             services.AddTransient<SubMenuQuery>();
             services.AddTransient<ReservationQuery>();
             services.AddTransient<RootQuery>();
+            services.AddTransient<MenuMutation>();
+            services.AddTransient<SubMenuMutation>();
+            services.AddTransient<ReservationMutation>();
+            services.AddTransient<RootMutation>();
+            services.AddTransient<MenuInputType>();
+            services.AddTransient<SubMenuInputType>();
+            services.AddTransient<ReservationInputType>();
             services.AddTransient<ISchema, RootSchema>();
 
             services.AddDbContext<CoffeeShopDbContext>(options =>
