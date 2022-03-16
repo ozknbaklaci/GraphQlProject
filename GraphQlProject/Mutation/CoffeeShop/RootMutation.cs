@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GraphQL.Types;
-using GraphQlProject.Query.CoffeeShop;
+﻿using GraphQL.Types;
 
 namespace GraphQlProject.Mutation.CoffeeShop
 {
